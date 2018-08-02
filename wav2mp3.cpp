@@ -99,7 +99,7 @@ void encode(string wavFile)
 	 
       fwrite(mp3_buffer, write, 1, mp3);
   } while (read != 0);
-  if (read >=0)
+  if (read >=0 && write >=0)
   	cout<<"Encoding Finished for [ "<< wavFile<<" ]"<<endl;
   else 
   	cout<<"Encoding Error for [ "<< wavFile<<" ]"<<endl;
