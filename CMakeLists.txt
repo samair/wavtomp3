@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 2.8)
+set(CMAKE_CXX_STANDARD 11)
+project(audio_converter)
+
+if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    message(STATUS "in linux")
+    find_library(LAME_LIB libmp3lame.a)
+elseif (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+    find_library(LAME_LIB libmp3lame-static.lib)	
+    find_library(THREAD_LIB   pthreadGC2.dll)
+endif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+
+find_library(THREAD_LIB pthread)
+add_executable(mp3coverter wav2mp3.cpp)
+target_link_libraries(mp3coverter "${LAME_LIB}" "${THREAD_LIB}")
+install(TARGETS mp3coverter DESTINATION bin)
